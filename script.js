@@ -80,16 +80,13 @@ sections.forEach(section => navObserver.observe(section));
 // ===== Smooth anchor scroll =====
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
-        const targetId = this.getAttribute('href');
-        const target = document.querySelector(targetId);
-
-        if (!target) return; // let browser handle it if missing
-
         e.preventDefault();
+        
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+            target.scrollIntoView({ behavior: 'smooth' });
+        }
 
-        target.scrollIntoView({
-            behavior: 'smooth',
-            block: 'start'
-        });
+
     });
 });
